@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>系统登录</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <!--<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>-->
+        <link rel="stylesheet" href="/back/assets/css/reset.css">
+        <link rel="stylesheet" href="/back/assets/css/supersized.css">
+        <link rel="stylesheet" href="/back/assets/css/style.css">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style>
+        	.input-big, .form-big .input, .form-big .button {
+			    line-height: 24px;
+			    width: 165px;
+			}
+		
+		.passcode {
+		    right: 0;
+		    bottom: 0;
+		    height: 32px;
+		    margin: 1px;
+		    border-left: solid 1px #ddd;
+		    text-align: center;
+		    line-height: 32px;
+		    border-radius: 0 4px 4px 0;
+		}
+		img {
+		    border: 0;
+		    vertical-align: bottom;
+		}
+		.codefalse{
+			float: left;
+			background-position: -217px -34px;
+			height:15px;
+			width:18px;
+		}
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="page-container">
+            <h1>后台管理系统</h1>
+            <form action="" method="post">
+                <input type="text" name="username" id="username" class="username" placeholder="用户名">
+                <input type="password" name="password" id="password" class="password" placeholder="密码">
+                <div class="field">
+                  <input type="text" class="input input-big" name="vrifyCode" id="vrifyCode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                   <img src="/kaptcha" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src='/kaptcha?d='+new Date()*1"> 
+                </div>
+                <div id="msgDiv" style="margin-top: 20px;display: none;">
+                	<div class="codefalse"><img src="/back/images/false.jpg" style="width: 100%;height: 100%;"></div>
+                	<div style="width: 50%;"><span class="msg" style="color: red;font-size: 14px;">账号或密码错误!</span></div>
+                </div>
+                <button id="login" type="button">登陆</button>
+                <div class="error"><span>+</span></div>
+            </form>
+        </div>
+
+        <!-- Javascript -->
+        <script src="/back/assets/js/jquery-1.8.2.min.js"></script>
+        <script src="/back/assets/js/supersized.3.2.7.min.js"></script>
+        <script src="/back/assets/js/supersized-init.js"></script>
+        <script src="/back/assets/js/scripts.js"></script>
+        <script src="/back/js/ext/login.js"></script>
+
+    </body>
+
+</html>
+
