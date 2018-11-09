@@ -1,7 +1,7 @@
 package com.example.test.controller;
 
-import com.example.test.dao.UserMapper;
-import com.example.test.entity.User;
+import com.example.test.dao.AdminMapper;
+import com.example.test.entity.Admin;
 import com.example.test.utils.Result;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class CaptchaImageCreateController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
     @Autowired
-    UserMapper userMapper;
+    AdminMapper adminMapper;
 
     @RequestMapping("/kaptcha")
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -66,7 +66,7 @@ public class CaptchaImageCreateController {
      */
     @RequestMapping(value = "imgvrifyControllerDefaultKaptcha",method = RequestMethod.POST)
     @ResponseBody
-    public Result imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String vrifyCode, User user){
+    public Result imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String vrifyCode, Admin admin){
         Result result = new Result();
         String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
         captchaId = captchaId.toLowerCase();
@@ -76,8 +76,8 @@ public class CaptchaImageCreateController {
             result.setCode(400);
             result.setMsg("验证码错误！");
         } else {
-            User userDB = userMapper.selectUserByName(user.getUsername());
-            if(userDB!=null&&userDB.getPassword().equals(user.getPassword())){
+            Admin adminDB = adminMapper.selectAdminByName(admin.getUsername());
+            if(adminDB !=null&& adminDB.getPassword().equals(admin.getPassword())){
                 result.setCode(200);
                 result.setMsg("登录成功！");
             }else{
@@ -146,4 +146,10 @@ public class CaptchaImageCreateController {
     public String add(){
         return "/back/add";
     }
+
+    @RequestMapping("/user")
+    public String user(){
+        return "/back/user";
+    }
+
 }
