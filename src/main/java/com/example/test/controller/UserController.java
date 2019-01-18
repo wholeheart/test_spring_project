@@ -18,7 +18,7 @@ import java.util.List;
  * @create: 2018-11-05 12:02
  **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping(value = "/user",produces = "application/json;charset=utf-8")
 public class UserController {
 
     @Autowired

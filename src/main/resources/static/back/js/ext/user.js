@@ -1,23 +1,29 @@
 
 function loadData(data){
+	$("#dataList").empty();
+	var renderItem = function(item,index){
 	var tr = $("<tr>",{"class":""});
 	$("<td>",{"class":"nb-td-check"})
         .append($("<input>",{"type":"checkbox","class":"nb-th-cb","name":"cb",
             "value":data.ent_id}))
         .appendTo(tr);
-	tr.append($("<td>",{"text":item.ent_id}))
-                .append($("<td>",{"text":item.ent_name}))
-                .append($("<td>",{"text":item.ent_corparation}))
-                .append($("<td>",{"text":item.ent_address}))
-                .append($("<td>",{"text":item.ent_workseniority}))
-                .append($("<td>",{"text":item.ent_product}))
-                .append($("<td>",{"text":item.ent_contact}))
-                .append($("<td>",{"text":item.ent_mobile}))
-                .append($("<td>",{"class":"businessType"+index}))
-                .append(addReleaseSelectTD(item))
-                .append(addIsdisplayedSelectTD(item))
-                .append(addIsvipSelectTD(item))
-                .append($("<td>",{"text":spin_formatDate(item.ent_createtime)}));
+	tr.append($("<td>",{"text":item.usr_id}))
+                .append($("<td>",{"text":item.usr_name}))
+                .append($("<td>",{"text":item.usr_telphone}))
+                .append($("<td>",{"text":item.usr_email}))
+                .append($("<td>",{"text":item.usr_gender}))
+                .append($("<td>",{"text":item.usr_age}))
+                .append($("<td>",{"text":item.usr_address}));
+                var optd = $("<td>");
+	            $("<a>",{"text":"修改","class":"nb-btn nb-btn-red"}).click(function(){
+	            	location.href="userinfo.html?usr_id="+item.usr_id;
+	            }).appendTo(optd);
+	            tr.append(optd);
+	            $("#dataList").append(tr);
+	};
+	for(var i=0;i<data.data.data.length;i++){
+        renderItem(data.data.data[i],i);
+    }
 }
 
 $.ajax({
@@ -25,10 +31,10 @@ $.ajax({
     type:"post",
     data:{},
     success:function(data){
-        if(data.code==200){
-            alert(data);
+        if(data.data.code==201){
+            loadData(data);
         }else{
-
+			
         }
     },
     error:function(e){
